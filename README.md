@@ -29,7 +29,7 @@ $ npm run dev
 | ----------------------------------------------------------------------: | :------------------------- | :-------------------------------- |
 |                                                                    <hr> | <hr>                       | **Controle de usuários**          |
 |   [![](https://img.shields.io/badge/POST-4682B4?style=for-the-badge)]() | `/login`                   | Efetua o login do usuário  |
-|   [![](https://img.shields.io/badge/POST-4682B4?style=for-the-badge)]() | `/reigster`           | Cadastrar um usuário |
+|   [![](https://img.shields.io/badge/POST-4682B4?style=for-the-badge)]() | `/register`           | Cadastrar um usuário |
 
 
 
