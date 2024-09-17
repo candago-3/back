@@ -15,10 +15,6 @@ $ cd back
 # Utilizando o MongoDB certifique-se que haja um banco no endereço:
 $ 'mongodb://127.0.0.1:27017/'
 
-# Ou configure com as suas credenciais no ambiente:
-> src/server/index.ts
-> mongoose.connect('seu-banco'
-
 # Instale as dependências do projeto
 $ npm i
 
