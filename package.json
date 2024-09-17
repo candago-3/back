@@ -8,7 +8,9 @@
   "name": "back",
   "version": "1.0.0",
   "main": "index.js",
-  "devDependencies": {},
+  "devDependencies": {
+    "@types/node": "^22.5.5"
+  },
   "scripts": {
     "dev": "/src/server node index.js"
   },

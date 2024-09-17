@@ -1,12 +1,12 @@
 const mongoose = require('mongoose');
-const app = require('../routes/index.js')
+const app = require('../routes/index.js');
 
 mongoose.connect('mongodb://127.0.0.1:27017/', {
    useNewUrlParser: true,
    useUnifiedTopology: true,
 }).then(() => {
    console.log('Conectado ao MongoDB');
-}).catch((error) => {
+}).catch((error:any) => {
    console.error('Erro ao conectar ao MongoDB:', error);
 });
 

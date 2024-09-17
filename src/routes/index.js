@@ -1,4 +1,4 @@
-const userSchema = require('../models/User')
+const userSchema = require('../models/user')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const express = require('express');
@@ -54,20 +54,24 @@ app.post('/login', async (req, res) => {
    }
 });
 
-
 app.get('/protected', (req, res) => {
-   const token = req.headers['authorization'];
-
+   console.log(req.headers);
+   const token = req.headers['authorization'].substring(7);
+   console.log(token);
    if (!token) {
       return res.status(401).json({ message: 'Acesso negado, token não fornecido' });
    }
 
    try {
-      const verified = jwt.verify(token, '@rl3yz1nh4');
+      const verified = jwt.verify(token, '@rl31z1nh4');
       res.json({ message: 'Acesso concedido', userId: verified.userId });
    } catch (error) {
       res.status(401).json({ message: 'Token inválido ou expirado' });
    }
 });
+
+// app.post('/home', aync (req, res) => {
+   
+// })
 
 module.exports = app
