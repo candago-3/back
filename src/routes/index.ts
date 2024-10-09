@@ -1,17 +1,17 @@
-const userSchema = require('../models/user')
-const bcrypt = require('bcryptjs');
-const jwt = require('jsonwebtoken');
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
+import userSchema from '../models/user';
+import bcrypt from 'bcryptjs';
+import jwt from 'jsonwebtoken';
+import express from 'express';
+import mongoose from 'mongoose';
+import cors from 'cors';
 
 const app = express();
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 const User = mongoose.model('User', userSchema);
 
-app.post('/register', async (req, res) => {
+app.post('/register', async (req:any, res:any) => {
    const { username, password } = req.body;
 
    try {
@@ -34,7 +34,7 @@ app.post('/register', async (req, res) => {
    }
 });
 
-app.post('/login', async (req, res) => {
+app.post('/login', async (req:any, res:any) => {
    const { username, password } = req.body;
 
    try {
@@ -56,24 +56,28 @@ app.post('/login', async (req, res) => {
    }
 });
 
-app.get('/protected', (req, res) => {
-   console.log(req.headers);
-   const token = req.headers['authorization'].substring(7);
-   console.log(token);
+app.get('/protected', (req: any, res: any) => {
+   const token = req.headers['authorization']?.substring(7); // Ensure the token exists
    if (!token) {
       return res.status(401).json({ message: 'Acesso negado, token não fornecido' });
    }
 
    try {
       const verified = jwt.verify(token, '@rl31z1nh4');
-      res.json({ message: 'Acesso concedido', userId: verified.userId });
+
+      if (typeof verified === 'object' && 'userId' in verified) {
+         res.json({ message: 'Acesso concedido', userId: verified.userId });
+      } else {
+         res.status(401).json({ message: 'Token inválido' });
+      }
    } catch (error) {
       res.status(401).json({ message: 'Token inválido ou expirado' });
    }
 });
 
+
 // app.post('/home', aync (req, res) => {
    
 // })
 
-module.exports = app
+export default app
