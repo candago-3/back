@@ -12,7 +12,7 @@ app.use(express.json());
 app.use('/register', register);
 app.use('/login', login);
 
-app.get('/protected', (req: Request, res: Response) :void => { // esta buceta nao funciona direito no front
+app.get('/protected', (req: Request, res: Response) :void => { //  nao funciona direito no front
    const token:any = req.headers['authorization']?.substring(7); 
    if (!token) {
       console.log('token nao passou')

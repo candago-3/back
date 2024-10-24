@@ -1,17 +1,12 @@
-const mongoose = require('mongoose');
+import connect from "../models/connection";
 import app from '../routes/index';
+import dotenv from "dotenv";
 
-mongoose.connect('mongodb://127.0.0.1:27017/', {
-   useNewUrlParser: true,
-   useUnifiedTopology: true,
-}).then(() => {
-   console.log('Conectado ao MongoDB');
-}).catch((error:any) => {
-   console.error('Erro ao conectar ao MongoDB:', error);
-});
+connect();
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
    console.log(`Servidor rodando na porta ${PORT}`);
 });
 
+dotenv.config();
