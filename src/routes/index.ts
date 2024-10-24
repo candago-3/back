@@ -15,7 +15,7 @@ app.use('/login', login);
 app.get('/protected', (req: Request, res: Response) :void => { //  nao funciona direito no front
    const token:any = req.headers['authorization']?.substring(7); 
    if (!token) {
-      console.log('token nao passou')
+      console.log('Token nao passou')
       res.status(401).json({ message: 'Acesso negado, token não fornecido' });
    }
 
@@ -23,7 +23,7 @@ app.get('/protected', (req: Request, res: Response) :void => { //  nao funciona 
       const verified = jwt.verify(token, '@rl31z1nh4');
 
       if (typeof verified === 'object' && 'userId' in verified) {
-         console.log('passou')
+         console.log('Autenticado');
          res.json({ message: 'Acesso concedido', userId: verified.userId });
       } else {
          res.status(401).json({ message: 'Token inválido' });
