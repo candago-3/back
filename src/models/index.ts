@@ -74,6 +74,10 @@ const ProdutoSchema = new Schema(
   { timestamps: true }
 );
 
+const ProdPrep = new Schema({
+
+})
+
 const Grupo = mongoose.model("Grupo", GrupoSchema);
 const Preparacao = mongoose.model(
   "Preparacao",

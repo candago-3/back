@@ -5,7 +5,7 @@ import jwt from 'jsonwebtoken';
 
 export async function login(req:Request, res:Response) : Promise<any> {
     const { mail, password } = req.body;
- 
+    
     try {
        const user:any = await User.findOne({ mail });
        if (!user) {

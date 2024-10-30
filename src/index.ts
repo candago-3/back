@@ -1,7 +1,9 @@
 import { Grupo, Preparacao, Produto } from "./models"; // importação dos modelos
 import fs from 'fs';
 import readline from 'node:readline';
+import connect from "./models/connection";
 
+connect();
 
 // importando tabela grupo
 var rl = readline.createInterface({
@@ -15,7 +17,6 @@ let x: number = 0; // variável necessária para pular a primeira linha de cabe�
 rl.on('line', function (linha: any) { // função que lê linha a linha do arquivo e as colaca na variável linha
     if (x > 0) { // só processa se não for a primeira linha
         var l = linha.split(';'); // quebra a linha nos pontos-e-vírgula gerando um array com cada campo/coluna
-        console.log(l);
         var grupo = new Grupo({ // criar um objeto Schema Grupo e popula seus campos/colunas
             gru_id: l[0],
             gru_descricao: l[1],
