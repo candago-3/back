@@ -57,8 +57,8 @@ const ProdutoSchema = new Schema(
       required: true,
       validate: {
         validator: async function (id: string) {
-          const grupo = await Grupo.findById(id); // verifica se id existe na coleção editoras
-          return !!grupo; // true se a editora existir
+          const grupo = await Grupo.findById(id);
+          return !!grupo; 
         },
         message: "O grupo fornecido não existe!",
       },
@@ -74,6 +74,59 @@ const ProdutoSchema = new Schema(
   { timestamps: true }
 );
 
+const ProdPrepSchema = new Schema(
+  {
+    produto: { 
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: "Produto", 
+      required: true 
+    },
+    preparacao: { 
+      type: mongoose.Schema.Types.ObjectId, 
+      ref: "Preparacao", 
+      required: true 
+    },
+    energia: { type: Number, required: true },
+    proteina: { type: Number, required: true },
+    lipidio: { type: Number, required: true },
+    carboidrato: { type: Number, required: true },
+    fibra: { type: Number, required: true },
+    colesterol: { type: Number, required: true },
+    agsaturado: { type: Number, required: true },
+    agmono: { type: Number, required: true },
+    agpoli: { type: Number, required: true },
+    aglinoleico: { type: Number, required: true },
+    aglinolenico: { type: Number, required: true },
+    agtranstotal: { type: Number, required: true },
+    acucartotal: { type: Number, required: true },
+    acucaradicao: { type: Number, required: true },
+    calcio: { type: Number, required: true },
+    magnesio: { type: Number, required: true },
+    manganes: { type: Number, required: true },
+    fosforo: { type: Number, required: true },
+    ferro: { type: Number, required: true },
+    sodio: { type: Number, required: true },
+    sodioadicao: { type: Number, required: true },
+    potassio: { type: Number, required: true },
+    cobre: { type: Number, required: true },
+    zinco: { type: Number, required: true },
+    selenio: { type: Number, required: true },
+    retinol: { type: Number, required: true },
+    vitamina_a: { type: Number, required: true },
+    tiamina: { type: Number, required: true },
+    riboflavina: { type: Number, required: true },
+    niacina: { type: Number, required: true },
+    niacina_ne: { type: Number, required: true },
+    piridoxina: { type: Number, required: true },
+    cobalamina: { type: Number, required: true },
+    folato: { type: Number, required: true },
+    vitamina_d: { type: Number, required: true },
+    vitamina_e: { type: Number, required: true },
+    vitamina_c: { type: Number, required: true },
+  },
+  { timestamps: true }
+);
+
 const Grupo = mongoose.model("Grupo", GrupoSchema);
 const Preparacao = mongoose.model(
   "Preparacao",
@@ -81,6 +134,7 @@ const Preparacao = mongoose.model(
   "preparacoes"
 );
 const Produto = mongoose.model("Produto", ProdutoSchema);
-const User = mongoose.model("User", userSchema)
+const User = mongoose.model("User", userSchema);
+const ProdPrep = mongoose.model("ProdPrep", ProdPrepSchema);
 
-export { Grupo, Preparacao, Produto, User };
+export { Grupo, Preparacao, Produto, User, ProdPrep };
