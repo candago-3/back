@@ -4,6 +4,8 @@ import cors from 'cors';
 import register from './register';
 import login from './login';
 import grupo from './grupo';
+import produto from './produto';
+import prodprep from './prodprep'
 import { Request, Response } from 'express';
 
 const app = express();
@@ -13,6 +15,8 @@ app.use(express.json());
 app.use('/register', register);
 app.use('/login', login);
 app.use('/getGrupo', grupo);
+app.use('/getProduto', produto);
+app.use('/getProdPreps', prodprep)
 
 app.get('/protected', (req: Request, res: Response) :void => { //funcionou
    const token:any = req.headers['authorization']?.substring(7); 

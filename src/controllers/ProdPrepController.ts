@@ -1,24 +1,16 @@
 import { json, Request, Response } from "express";
-import { Grupo, Produto, ProdPrep, Preparacao } from "../models";
+import { ProdPrep } from "../models";
 
-class PropPrepController {
+class ProdPrepController {
 
-    // create
-
-    // list
-
-    public async list(res: Response): Promise<Response> {
+    async list(res: Response): Promise<any> {
         try {
-            const objects = Grupo.find().sort({ nome: "asc" });
+            const objects = ProdPrep.find().sort({ nome: "asc" });
             return res.json(objects);
         } catch (error: any) {
             return res.json({ message: error.message });
         }
     }
-
-    // delete
-
-    // update
 }
 
-export default new PropPrepController();
+export default new ProdPrepController();

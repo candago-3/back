@@ -1,10 +1,10 @@
 import { Request, Response } from "express";
-import { Grupo } from "../models";
+import { Produto } from "../models";
 
-class GrupoController {
+class ProdutoController {
    async list(req: Request,res: Response): Promise<any> {
     try {
-      const objects = await Grupo.find().sort({ nome: "asc" });
+      const objects = await Produto.find().sort({ nome: "asc" });
       return res.json(objects);
     } catch (error: any) {
       return res.json({ message: error.message });
@@ -12,4 +12,4 @@ class GrupoController {
   }
 }
 
-export default new GrupoController();
+export default new ProdutoController();
