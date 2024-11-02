@@ -9,7 +9,7 @@ class PropPrepController {
 
     public async list(res: Response): Promise<Response> {
         try {
-            const objects = Grupo.find().sort({ nome: "asc" });
+            const objects = Grupo.find().sort({ nome: "asc" }).limit(10);
             return res.json(objects);
         } catch (error: any) {
             return res.json({ message: error.message });
