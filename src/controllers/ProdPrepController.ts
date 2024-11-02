@@ -1,14 +1,14 @@
 import { json, Request, Response } from "express";
-import { ProdPrep } from "../models";
+import { ProdPrep, Produto, Preparacao } from "../models";
 
 class ProdPrepController {
 
-    async list(res: Response): Promise<any> {
+    async list(req: Request, res: Response): Promise<any> {
         try {
-            const objects = ProdPrep.find().sort({ nome: "asc" });
+            const objects = ProdPrep.find({produto:{$exists: true}, }).sort({ nome: "asc" });
             return res.json(objects);
         } catch (error: any) {
-            return res.json({ message: error.message });
+        console.log({ message: error.message });
         }
     }
 }
