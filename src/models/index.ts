@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 const { Schema } = mongoose;
 
-const userSchema = new Schema({
+const UserSchema = new Schema({
   mail: {
     type: String,
     required: true,
@@ -17,13 +17,34 @@ const userSchema = new Schema({
         `${props.value} não é um formato de e-mail válido.`,
     },
   },
-  password: { 
+  password: {
     type: String,
     required: true,
     minLenght: 8,
     maxLenght: 40,
-},
+  },
+  age: {
+    type: Number,
+    minLenght:2,
+    maxLength:2
+  },
+  height: {
+    type:Number,
+    minLenght:3,
+    maxLength:3
+  }
 });
+
+const UserDailyRefSchema = new mongoose.Schema({
+  user_id: {
+    type: String,
+    required: true,
+  },
+  prodprep_id: {
+    type: String,
+    required: true,
+  },
+},{ timestamps: true });
 
 const GrupoSchema = new Schema(
   {
@@ -58,7 +79,7 @@ const ProdutoSchema = new Schema(
       validate: {
         validator: async function (id: string) {
           const grupo = await Grupo.findById(id);
-          return !!grupo; 
+          return !!grupo;
         },
         message: "O grupo fornecido não existe!",
       },
@@ -76,15 +97,15 @@ const ProdutoSchema = new Schema(
 
 const ProdPrepSchema = new Schema(
   {
-    produto: { 
-      type: mongoose.Schema.Types.ObjectId, 
-      ref: "Produto", 
-      required: true 
+    produto: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Produto",
+      required: true,
     },
-    preparacao: { 
-      type: mongoose.Schema.Types.ObjectId, 
-      ref: "Preparacao", 
-      required: true 
+    preparacao: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Preparacao",
+      required: true,
     },
     energia: { type: Number, required: true },
     proteina: { type: Number, required: true },
@@ -133,8 +154,9 @@ const Preparacao = mongoose.model(
   PreparacaoSchema,
   "preparacoes"
 );
+const UserDailyRef = mongoose.model('UserDailyRef', UserDailyRefSchema);
 const Produto = mongoose.model("Produto", ProdutoSchema);
-const User = mongoose.model("User", userSchema);
+const User = mongoose.model("User", UserSchema);
 const ProdPrep = mongoose.model("ProdPrep", ProdPrepSchema);
 
-export { Grupo, Preparacao, Produto, User, ProdPrep };
+export { Grupo, Preparacao, Produto, User, ProdPrep, UserDailyRef };

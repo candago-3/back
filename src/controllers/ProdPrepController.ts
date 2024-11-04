@@ -25,9 +25,10 @@ class ProdPrepController {
                 const object:ProdPrepDoc = {prodprep_id, produto_named, preparacao_named};
                 output_named.push(object)
             }
-            return res.json(output_named);
+            return res.json(output_named); 
         } catch (error: any) {
         console.log({ message: error.message });
+        return res.json(error);
         }
     }
 }

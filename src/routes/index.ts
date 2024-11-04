@@ -5,7 +5,8 @@ import register from './register';
 import login from './login';
 import grupo from './grupo';
 import produto from './produto';
-import prodprep from './prodprep'
+import prodprep from './prodprep';
+import userRef from './userRef';
 import { Request, Response } from 'express';
 
 const app = express();
@@ -16,7 +17,8 @@ app.use('/register', register);
 app.use('/login', login);
 app.use('/getGrupo', grupo);
 app.use('/getProduto', produto);
-app.use('/getProdPrep', prodprep)
+app.use('/getProdPrep', prodprep);
+app.use('/ref', userRef);
 
 app.get('/protected', (req: Request, res: Response) :void => { //funcionou
    const token:any = req.headers['authorization']?.substring(7); 
