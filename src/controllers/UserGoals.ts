@@ -38,20 +38,15 @@ class UserGoalController {
     }
   }
 
-  async update(req: any, res: any): Promise<any> { //nao ta funcionandoooooooooooooooo
+  async update(req: any, res: any): Promise<any> {
     const { user_id, weigth, weigthGoal } = req.body;
     try {
-      const user_data = await UserGoal.find({ user_id: user_id }).select( //puxa o peso atual e a meta de peso do caba
-        "weigth weigthGoal -_id"
+      const user_data = await UserGoal.findOneAndUpdate({ user_id: user_id }, { weigth: weigth, weigthGoal:weigthGoal }, 
+        {new: true, fields: "weigth weigthGoal - _id"} // seleciona e atualiza o baguio
       );
       console.log(user_data);
       if (user_data) {
-        user_data[0].weigth = weigth;
-        user_data[0].weigthGoal = weigthGoal;
-        console.log(user_data);
-        const response = await user_data[0].save(); 
-        console.log(response);
-        return res.json({ message: "Metas alteradas com sucesso", response });
+        return res.json({ message: "Registro alterado com sucesso", user_data });
       }
       else {
         return res.json({ message: "Usuário inexistente!" });
