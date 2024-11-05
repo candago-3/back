@@ -7,6 +7,7 @@ import grupo from './grupo';
 import produto from './produto';
 import prodprep from './prodprep';
 import userRef from './userRef';
+import UserGoal from './userGoal';
 import { Request, Response } from 'express';
 
 const app = express();
@@ -19,11 +20,12 @@ app.use('/getGrupo', grupo);
 app.use('/getProduto', produto);
 app.use('/getProdPrep', prodprep);
 app.use('/ref', userRef);
+app.use('/goals', UserGoal);
 
 app.get('/protected', (req: Request, res: Response) :void => { //funcionou
    const token:any = req.headers['authorization']?.substring(7); 
    if (!token) {
-      console.log('Token nao passou')
+      console.log('Token nao passou');
       res.status(401).json({ message: 'Acesso negado, token não fornecido' });
    }
 

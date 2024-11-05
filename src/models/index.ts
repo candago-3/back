@@ -3,8 +3,9 @@ const { Schema } = mongoose;
 
 const UserSchema = new Schema({
   name: {
-    type:String,
-    maxLength:50
+    required: true,
+    type: String,
+    maxLength: 50,
   },
   mail: {
     type: String,
@@ -25,30 +26,53 @@ const UserSchema = new Schema({
     type: String,
     required: true,
     minLenght: 8,
-    maxLenght: 40,
+    maxLenght: 60,
   },
-  age: {
-    type: Number,
-    minLenght:2,
-    maxLength:2
-  },
-  height: {
-    type:Number,
-    minLenght:3,
-    maxLength:3
-  }
 });
 
-const UserDailyRefSchema = new mongoose.Schema({
+const UserGoalSchema = new mongoose.Schema({
   user_id: {
     type: String,
     required: true,
+    unique: true
   },
-  prodprep_id: {
+  age: {
     type: String,
     required: true,
   },
-},{ timestamps: true });
+  weigth: {
+    type: String,
+    required: true,
+    minLenght: 2,
+    maxLenght: 3,
+  },
+  heigth: {
+    type: String,
+    required: true,
+    minLenght: 2,
+    maxLenght: 3,
+  },
+  weigthGoal: {
+    type: String,
+    required: true,
+    minLenght: 2,
+    maxLenght: 3,
+  },
+});
+
+const UserDailyRefSchema = new mongoose.Schema(
+  {
+    user_id: {
+      type: String,
+      required: true,
+    },
+    prodprep_id: {
+      type: String,
+      required: true,
+    },
+  },
+  { timestamps: true }
+);
 
 const GrupoSchema = new Schema(
   {
@@ -158,9 +182,10 @@ const Preparacao = mongoose.model(
   PreparacaoSchema,
   "preparacoes"
 );
-const UserDailyRef = mongoose.model('UserDailyRef', UserDailyRefSchema);
+const UserDailyRef = mongoose.model("UserDailyRef", UserDailyRefSchema);
 const Produto = mongoose.model("Produto", ProdutoSchema);
 const User = mongoose.model("User", UserSchema);
 const ProdPrep = mongoose.model("ProdPrep", ProdPrepSchema);
+const UserGoal = mongoose.model("UserGoal", UserGoalSchema);
 
-export { Grupo, Preparacao, Produto, User, ProdPrep, UserDailyRef };
+export { Grupo, Preparacao, Produto, User, ProdPrep, UserDailyRef, UserGoal };
