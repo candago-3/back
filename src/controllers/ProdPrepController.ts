@@ -13,7 +13,7 @@ class ProdPrepController {
     async list(req:Request, res: Response): Promise<any> { // lista as variações dos produtos e suas preparações
         try {
             const output_named:ProdPrepDoc[] = []; // array para guardar o nome dos elementos referenciando o Id da consulta de prodprep
-            const objects = await ProdPrep.find().sort().limit(100).select("produto preparacao"); //retorna todas as variações de prod e prep
+            const objects = await ProdPrep.find().sort().limit(1000).select("produto preparacao"); //retorna todas as variações de prod e prep
             for (var i = 0; i < objects.length; i++){ //itera sobre todos os itens de prodprep
                 const prod_id:string = objects[i].produto.toString() // extrai o id do produto
                 const prep_id:string = objects[i].preparacao.toString();//extrai o id da preparacao
