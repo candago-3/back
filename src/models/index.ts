@@ -58,6 +58,31 @@ const UserGoalSchema = new mongoose.Schema({
     minLenght: 2,
     maxLenght: 3,
   },
+  caloriesGoal: {
+    type: String,
+    required: true,
+    maxLenght: 5,
+  },
+  proteinGoal: {
+    type: String,
+    required: true,
+    maxLenght: 5,
+  },
+  fatGoal: {
+    type: String,
+    required: true,
+    maxLenght: 5,
+  },
+  carbGoal: {
+    type: String,
+    required: true,
+    maxLenght: 5,
+  },
+  waterGoal: {
+    type: String,
+    required: true,
+    maxLenght: 5,
+  }
 });
 
 const UserDailyRefSchema = new mongoose.Schema(

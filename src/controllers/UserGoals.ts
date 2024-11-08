@@ -4,6 +4,11 @@ class UserGoalController {
   async create(req: any, res: any): Promise<any> { //cria o registro de peso e meta do usuario, tbem armazena infos como idade e altura
     const { user_id, age, heigth, weigth, weigthGoal } = req.body;
     try {
+    const caloriesGoal = 25 * weigthGoal;
+    const proteinGoal = Math.round(0.15 * caloriesGoal / 4);
+    const fatGoal = Math.round(0.25 * caloriesGoal / 9);
+    const carbGoal = Math.round(0.60 * caloriesGoal / 4);
+    const waterGoal = Math.round(weigth * 35);
     const existingUser = await UserGoal.findOne({ user_id });//procura se ja tem registro do caba
     console.log(existingUser);
     if (existingUser) { //se tiver não cria mais um novo pra evitar duplicatas
@@ -15,6 +20,11 @@ class UserGoalController {
         heigth,
         weigth,
         weigthGoal,
+        proteinGoal,
+        fatGoal,
+        carbGoal,
+        waterGoal,
+        caloriesGoal
       });
       const result = await newUserGoal.save();
       return res
