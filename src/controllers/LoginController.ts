@@ -18,10 +18,12 @@ export async function login(req:Request, res:Response) : Promise<any> {
        }
        
        const token = jwt.sign({ userId: user._id }, '@rl31z1nh4');
-
-       const user_id = user._id
+       
+       const user_data = await User.find({ _id: user._id }).select('name');
+       const name = user_data[0].name;
+       const user_id = user._id;
  
-       return res.json({ message: 'Login realizado com sucesso', token, user_id });
+       return res.json({ message: 'Login realizado com sucesso', token, user_id, name });
     } catch (error) {
        return res.status(500).json({ message: 'Erro no servidor', error });
     }

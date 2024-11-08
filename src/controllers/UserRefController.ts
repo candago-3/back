@@ -10,7 +10,8 @@ class UserDailyRefController {
 
     async create(req: any, res: any): Promise<any> {
         const { user_id, prodprep_id, food_weigth } = req.body;
-        console.log(user_id);
+        console.log('spfc')
+        console.log("userid:" + user_id);
         console.log(prodprep_id)
         console.log(food_weigth);
         try {
@@ -45,7 +46,6 @@ class UserDailyRefController {
                 else{
                     res.json({message : "Objeto indefinido"})
                 }
-                console.log('spfc');
             }
             return res.json({ user_data });
         }
