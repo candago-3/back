@@ -70,6 +70,10 @@ const UserDailyRefSchema = new mongoose.Schema(
       type: String,
       required: true,
     },
+    food_weigth: {
+      type:String,
+      required:true,
+    }
   },
   { timestamps: true }
 );
