@@ -36,9 +36,9 @@ class UserGoalController {
   }
 
   async list(req: any, res: any): Promise<any> { //so puxa as infos do caba
-    const { user_id } = req.body;
+    const { user_id } = req.query;
     try {
-      const user_data = await UserGoal.find({ user_id: user_id }).select(
+      const user_data = await UserGoal.findOne({ user_id: user_id }).select(
         "age weigth heigth weigthGoal proteinGoal fatGoal carbGoal waterGoal caloriesGoal -_id"
       );
       console.log(user_data);
