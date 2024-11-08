@@ -5,14 +5,16 @@ class UserGoalController {
     const { user_id, age, heigth, weigth, weigthGoal } = req.body;
     try {
       const caloriesGoal = 25 * weigthGoal;
-      const proteinGoal = Math.round(0.15 * caloriesGoal / 4);
-      const fatGoal = Math.round(0.25 * caloriesGoal / 9);
-      const carbGoal = Math.round(0.60 * caloriesGoal / 4);
+      const proteinGoal = Math.round((0.15 * caloriesGoal) / 4);
+      const fatGoal = Math.round((0.25 * caloriesGoal) / 9);
+      const carbGoal = Math.round((0.6 * caloriesGoal) / 4);
       const waterGoal = Math.round(weigth * 35);
 
       const existingUser = await UserGoal.findOne({ user_id });
       if (existingUser) {
-        return res.status(400).json({ message: 'Suas metas já foram cadastradas' });
+        return res
+          .status(400)
+          .json({ message: "Suas metas já foram cadastradas" });
       }
 
       const newUserGoal = new UserGoal({
@@ -25,19 +27,22 @@ class UserGoalController {
         fatGoal,
         carbGoal,
         waterGoal,
-        caloriesGoal
+        caloriesGoal,
       });
       const result = await newUserGoal.save();
-      return res.status(201).json({ message: "Metas registradas com sucesso", result });
+      return res
+        .status(201)
+        .json({ message: "Metas registradas com sucesso", result });
     } catch (error) {
       return res.status(500).json({ message: "Erro no servidor", error });
     }
   }
 
   async list(req: any, res: any): Promise<any> {
-    const { user_id } = req.query;
+    //so puxa as infos do caba
+    const { user_id } = req.body;
     try {
-      const user_data = await UserGoal.findOne({ user_id }).select(
+      const user_data = await UserGoal.find({ user_id: user_id }).select(
         "age weigth heigth weigthGoal proteinGoal fatGoal carbGoal waterGoal caloriesGoal -_id"
       );
       return res.json(user_data);
@@ -58,9 +63,9 @@ class UserGoalController {
 
       // Calcula metas automáticas baseadas no novo peso
       const caloriesGoal = 25 * (weigthGoal || user_data.weigth);
-      const proteinGoal = Math.round(0.15 * caloriesGoal / 4);
-      const fatGoal = Math.round(0.25 * caloriesGoal / 9);
-      const carbGoal = Math.round(0.60 * caloriesGoal / 4);
+      const proteinGoal = Math.round((0.15 * caloriesGoal) / 4);
+      const fatGoal = Math.round((0.25 * caloriesGoal) / 9);
+      const carbGoal = Math.round((0.6 * caloriesGoal) / 4);
       const waterGoal = Math.round((weigth || user_data.weigth) * 35);
 
       // Define os campos atualizados
@@ -71,17 +76,24 @@ class UserGoalController {
         fatGoal,
         carbGoal,
         waterGoal,
-        caloriesGoal
+        caloriesGoal,
       };
 
       // Atualiza no banco de dados
       const updatedUserData = await UserGoal.findOneAndUpdate(
         { user_id },
         updatedFields,
-        { new: true, fields: "weigth weigthGoal proteinGoal fatGoal carbGoal waterGoal caloriesGoal -_id" }
+        {
+          new: true,
+          fields:
+            "weigth weigthGoal proteinGoal fatGoal carbGoal waterGoal caloriesGoal -_id",
+        }
       );
 
-      return res.json({ message: "Registro alterado com sucesso", updatedUserData });
+      return res.json({
+        message: "Registro alterado com sucesso",
+        updatedUserData,
+      });
     } catch (error) {
       return res.status(500).json({ message: "Erro no servidor", error });
     }
