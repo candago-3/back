@@ -45,7 +45,7 @@ class UserDailyRefController {
                 else{
                     res.json({message : "Objeto indefinido"})
                 }
-                console.log('spfc');
+                console.log('TOCA O HINO DO CURINTIA');
             }
             return res.json({ user_data });
         }
