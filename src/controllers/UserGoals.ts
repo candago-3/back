@@ -39,7 +39,7 @@ class UserGoalController {
     const { user_id } = req.body;
     try {
       const user_data = await UserGoal.find({ user_id: user_id }).select(
-        "age weigth heigth weigthGoal -_id"
+        "age weigth heigth weigthGoal proteinGoal fatGoal carbGoal waterGoal caloriesGoal -_id"
       );
       console.log(user_data);
       return res.json(user_data);
@@ -49,9 +49,11 @@ class UserGoalController {
   }
 
   async update(req: any, res: any): Promise<any> {
-    const { user_id, weigth, weigthGoal } = req.body;
+    const { user_id, weigth, weigthGoal, proteinGoal, fatGoal, carbGoal, waterGoal } = req.body;
     try {
-      const user_data = await UserGoal.findOneAndUpdate({ user_id: user_id }, { weigth: weigth, weigthGoal:weigthGoal }, 
+      const user_data = await UserGoal.findOneAndUpdate({ user_id: user_id }, { weigth: weigth, weigthGoal:weigthGoal, proteinGoal: proteinGoal,
+        fatGoal:fatGoal, carbGoal:carbGoal, waterGoal:waterGoal
+       }, 
         {new: true, fields: "weigth weigthGoal - _id"} // seleciona e atualiza o baguio
       );
       console.log(user_data);
