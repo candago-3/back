@@ -51,7 +51,7 @@ class UserGoalController {
   }
 
   async update(req: any, res: any): Promise<any> {
-    const { user_id, weigth, weigthGoal } = req.body;
+    const { user_id, weigth, weigthGoal, waterGoal, proteinGoal, carbGoal, caloriesGoal, fatGoal } = req.body;
 
     try {
       // Recupera os dados atuais do usuário
@@ -61,12 +61,14 @@ class UserGoalController {
       }
 
       // Calcula metas automáticas baseadas no novo peso
-      const caloriesGoal = 25 * (weigthGoal || user_data.weigth);
-      const proteinGoal = Math.round((0.15 * caloriesGoal) / 4);
-      const fatGoal = Math.round((0.25 * caloriesGoal) / 9);
-      const carbGoal = Math.round((0.6 * caloriesGoal) / 4);
-      const waterGoal = Math.round((weigth || user_data.weigth) * 35);
-      console.log( caloriesGoal, proteinGoal, fatGoal, carbGoal, waterGoal)
+      if(weigth){
+        const caloriesGoal = 25 * (weigthGoal || user_data.weigth);
+        const proteinGoal = Math.round((0.15 * caloriesGoal) / 4);
+        const fatGoal = Math.round((0.25 * caloriesGoal) / 9);
+        const carbGoal = Math.round((0.6 * caloriesGoal) / 4);
+        const waterGoal = Math.round((weigth || user_data.weigth) * 35);
+        console.log( caloriesGoal, proteinGoal, fatGoal, carbGoal, waterGoal )
+      }
 
       // Define os campos atualizados
       const updatedFields = {

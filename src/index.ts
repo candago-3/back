@@ -5,7 +5,7 @@ import connect from "./models/connection";
 
 connect(); //função que conecta ao mongodb e inicia o servidor
 
-// //importando tabela grupo----------------------------------------------------------------------------------
+//importando tabela grupo----------------------------------------------------------------------------------
 
 // var rl = readline.createInterface({
 //     input: fs.createReadStream('./src/Taco-Grupo.csv'),
@@ -92,7 +92,7 @@ connect(); //função que conecta ao mongodb e inicia o servidor
 
 
 
-// importando tabela prodprep --------------------------------------------------------------------
+// // importando tabela prodprep --------------------------------------------------------------------
 
 var rl = readline.createInterface({
   input: fs.createReadStream('./src/Taco-ProdPrep.csv'),
